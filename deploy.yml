@@ -1,0 +1,106 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-administration-backend
+  namespace: integration
+data:
+  APP_PORT: '3000'
+  APP_HOST: localhost
+  APP_ENV: development
+  APP_LOG_PATH: /opt/administration-backend.log
+  DB_HOST: 172.29.30.62
+  DB_PORT: '5432'
+  DB_DATABASE: gas-ps-integration
+  DB_USERNAME: postgres
+  DB_PASSWORD: postgres
+  ELASTICSEARCH_HOST: http://172.29.30.75
+  ELASTICSEARCH_PORT: '9200'
+  ELASTICSEARCH_USERNAME: grub
+  ELASTICSEARCH_PASSWORD: hb1k5rW4
+  KAFKA_HOST: 172.29.30.57
+  KAFKA_PORT: '9092'
+  NSI_DICTIONARY_URL: https://gasps-dev.gost-group.com/nsi
+  NSI_DICTIONARY_LOGIN: gasps
+  NSI_DICTIONARY_PASSWORD: Hfcjhn9C4n7VcHE6
+  NSI_DICTIONARY_CACHE_UPDATE: '60000000'
+  NSI_DICTIONARY_DATA_HEAP_SIZE: '500'
+  DIB_URL: https://gasps-dev.gost-group.com
+  MINIO_ACCESS_KEY: integration-5Msk1V3xfaWzHtBsMnlCQ
+  MINIO_SECRET_KEY: LXvCIGdjUgvd6pLmbFEm9bmjqpHjThAAnPlSrzt3L8
+  MINIO_END_POINT: 172.29.30.58
+  MINIO_PORT: '9000'
+  MINIO_BUCKET: integration
+---
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: integration
+  name: administration-backend
+spec:
+  ports:
+    - targetPort: 3000
+      port: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: administration-backend
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: administration-backend
+  labels:
+    app: administration-backend
+  namespace: integration
+spec:
+  replicas: 1
+  #  updateStrategy:
+  #    type: RollingUpdate
+  #type: OnDelete
+  selector:
+    matchLabels:
+      app: administration-backend
+  template:
+    metadata:
+      labels:
+        app: administration-backend
+    spec:
+      containers:
+        - name: administration-backend
+          image: registry-gp.gost-group.com/gasps/administration-backend/administration-backend:{{VERSION}}
+          imagePullPolicy: Always
+          #imagePullPolicy: Never
+          #imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: env-administration-backend
+          ports:
+            - containerPort: 3000
+
+      restartPolicy: Always
+
+      imagePullSecrets:
+        - name: regcred
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: administration-backend
+  namespace: integration
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: gasps-dev.gost-group.com
+      http:
+        paths:
+          - path: /administration/api/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: administration-backend
+                port:
+                  number: 3000

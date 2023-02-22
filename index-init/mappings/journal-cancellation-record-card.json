@@ -1,0 +1,90 @@
+{
+  "settings": {
+    "index": {
+      "max_ngram_diff": 100
+    },
+    "analysis": {
+      "filter": {
+        "ngram_filter": {
+          "type": "ngram",
+          "min_gram": 1,
+          "max_gram": 100
+        }
+      },
+      "analyzer": {
+        "index_ngram": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": ["ngram_filter", "lowercase"]
+        },
+        "search_ngram": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": ["lowercase"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "uniqueNumber": {
+        "type": "text",
+        "analyzer": "index_ngram",
+        "search_analyzer": "search_ngram",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "uniqId": {
+        "type": "keyword"
+      },
+      "idVersion": {
+        "type": "keyword"
+      },
+      "cardId": {
+        "type": "keyword"
+      },
+      "formNumber": {
+        "type": "keyword"
+      },
+      "operationDate": {
+        "type": "date"
+      },
+      "operationTypeTitle": {
+        "type": "keyword"
+      },
+      "comment": {
+        "type": "keyword"
+      },
+      "userLogin": {
+        "type": "keyword"
+      },
+      "responseMeasureId": {
+        "type": "keyword"
+      },
+      "responseMeasureTitle": {
+        "type": "keyword"
+      },
+      "divisionId": {
+        "type": "keyword"
+      },
+      "divisionTitle": {
+        "type": "keyword"
+      },
+      "regionId": {
+        "type": "keyword"
+      },
+      "regionTitle": {
+        "type": "keyword"
+      },
+      "departmentId": {
+        "type": "keyword"
+      },
+      "departmentTitle": {
+        "type": "keyword"
+      }
+    }
+  }
+}

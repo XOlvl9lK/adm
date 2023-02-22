@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: env-administration-backend
+  namespace: integration
+data:
+  APP_PORT: '3000'
+  APP_HOST: localhost
+  APP_ENV: development
+  APP_LOG_PATH: /opt/administration-backend.log
+  DB_HOST: 10.2.22.232
+  DB_PORT: '5432'
+  DB_DATABASE: gas-ps-integration
+  DB_USERNAME: postgres
+  DB_PASSWORD: postgres
+  ELASTICSEARCH_HOST: http://10.2.22.225
+  ELASTICSEARCH_PORT: '9200'
+  ELASTICSEARCH_USERNAME: grub
+  ELASTICSEARCH_PASSWORD: hb1k5rW4
+  KAFKA_HOST: 10.2.22.221
+  KAFKA_PORT: '9092'
+  NSI_DICTIONARY_URL: http://10.2.22.215/nsi
+  NSI_DICTIONARY_LOGIN: gasps
+  NSI_DICTIONARY_PASSWORD: Hfcjhn9C4n7VcHE6
+  NSI_DICTIONARY_CACHE_UPDATE: '60000000'
+  NSI_DICTIONARY_DATA_HEAP_SIZE: '500'
+  DIB_URL: http://10.2.22.217
+

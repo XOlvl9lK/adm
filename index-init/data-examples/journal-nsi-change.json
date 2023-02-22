@@ -1,0 +1,42 @@
+[
+  {
+    "eventDate": "2015-05-24T08:40:29-04:00",
+    "userName": "Romero",
+    "ipAddress": "8.107.242.230",
+    "sessionId": "62b2e6b3b02eddfda5e799a4",
+    "objectTitle": "Правила ФЛК",
+    "eventTitle": "Редактирование"
+  },
+  {
+    "eventDate": "2006-10-26T02:32:08-05:00",
+    "userName": "Becky",
+    "ipAddress": "124.246.76.94",
+    "sessionId": "62b2e6b3b14dbeb72eb0078f",
+    "objectTitle": "Каталог",
+    "eventTitle": "Удаление"
+  },
+  {
+    "eventDate": "2021-06-01T01:22:06-04:00",
+    "userName": "Paul",
+    "ipAddress": "45.195.124.219",
+    "sessionId": "62b2e6b3e88a4e88b303a29a",
+    "objectTitle": "Справочник",
+    "eventTitle": "Создание"
+  },
+  {
+    "eventDate": "2021-02-14T11:28:22-04:00",
+    "userName": "Pearl",
+    "ipAddress": "158.206.250.147",
+    "sessionId": "62b2e6b3ba28652da0907c7f",
+    "objectTitle": "Запись в справочник",
+    "eventTitle": "Создание"
+  },
+  {
+    "eventDate": "2016-06-09T08:28:21-04:00",
+    "userName": "Jeri",
+    "ipAddress": "147.64.195.163",
+    "sessionId": "62b2e6b36394f4965f09719f",
+    "objectTitle": "Справочник",
+    "eventTitle": "Удаление версии"
+  }
+]

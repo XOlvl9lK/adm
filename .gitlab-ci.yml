@@ -1,0 +1,76 @@
+variables:
+  WERF_VERSION: "1.2 alpha"
+  CI_NAMESPACE: integration
+  WERF_BUILDAH_MODE: "auto"
+  WERF_BUILDAH_STORAGE_DRIVER: "overlay"
+
+stages:
+  - build
+  - build-fail-notify
+  - bundle
+  - deploy
+  - deploy-fail-notify
+
+build:
+  stage: build
+  image: docker:18.09
+  services:
+    - docker:18.09-dind
+  script:
+    - docker build -t $CI_REGISTRY_IMAGE/administration-backend:$CI_COMMIT_SHORT_SHA .
+    - docker login -u vyacheslav.seregin -p ${ACCESS_TOKEN} ${CI_REGISTRY}
+    - docker push $CI_REGISTRY_IMAGE/administration-backend:$CI_COMMIT_SHORT_SHA
+#    - sh ci-notify.sh ✅
+  tags:
+    - runner
+#  rules:
+#    - if: '$STARTB'
+
+on-build-failure:
+  stage: build-fail-notify
+  variables:
+    mode: Build
+  script:
+    - sh ci-notify.sh ❌
+  when: on_failure #fail
+#  rules:
+#    - if: '$STARTB'
+
+Deploy_container:
+  image:
+    name: lachlanevenson/k8s-kubectl:latest
+    entrypoint: ["/bin/sh", "-c"]
+  stage: deploy
+  variables:
+    mode: Deploy
+#    VERSION: ${CI_COMMIT_SHORT_SHA}
+  tags:
+    - runner
+  script:
+#    - kubectl delete -n integration -f deploy-front.yml
+    - sed -i "s/{{VERSION}}/${CI_COMMIT_SHORT_SHA}/g" deploy.yml
+    - kubectl apply -n integration -f deploy.yml
+      #success
+    - sh ci-notify.sh ✅
+#  rules:
+#    - if: '$STARTD'
+
+on-deploy-failure:
+  stage: deploy-fail-notify
+  variables:
+    mode: Deploy
+  script:
+    - sh ci-notify.sh ❌
+  when: on_failure #fail
+#  rules:
+#    - if: '$STARTD'
+
+
+include:
+  - project: 'flant/common-ci'
+    #ref: main
+    ref: flant-cache-build
+    file: .gitlab-ci.bundle.yml
+  - project: 'flant/common-ci'
+    ref: main
+    file: .gitlab-ci.bundle-deploy.yml

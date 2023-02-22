@@ -1,0 +1,161 @@
+{
+  "settings": {
+    "index": {
+      "max_ngram_diff": 100
+    },
+    "analysis": {
+      "filter": {
+        "ngram_filter": {
+          "type": "ngram",
+          "min_gram": 1,
+          "max_gram": 100
+        }
+      },
+      "analyzer": {
+        "index_ngram": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": ["ngram_filter", "lowercase"]
+        },
+        "search_ngram": {
+          "type": "custom",
+          "tokenizer": "keyword",
+          "filter": ["lowercase"]
+        }
+      }
+    }
+  },
+  "mappings": {
+    "properties": {
+      "fileTitle": {
+        "type": "text",
+        "analyzer": "index_ngram",
+        "search_analyzer": "search_ngram",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "loadId": {
+        "type": "keyword"
+      },
+      "packageKuspId": {
+        "type": "keyword"
+      },
+      "createDate": {
+        "type": "date"
+      },
+      "allPackageRecordsNumber": {
+        "type": "long"
+      },
+      "downloadedRecordsNumber": {
+        "type": "long"
+      },
+      "errorProcessedRecordsNumber": {
+        "type": "long"
+      },
+      "sourceTitle": {
+        "type": "keyword"
+      },
+      "startProcessingDate": {
+        "type": "date"
+      },
+      "endProcessingDate": {
+        "type": "date"
+      },
+      "packageSignatureDate": {
+        "type": "date"
+      },
+      "operatorLogin": {
+        "type": "text",
+        "analyzer": "index_ngram",
+        "search_analyzer": "search_ngram",
+        "fields": {
+          "keyword": {
+            "type": "keyword"
+          }
+        }
+      },
+      "statusTitle": {
+        "type": "keyword"
+      },
+      "divisionId": {
+        "type": "keyword"
+      },
+      "divisionTitle": {
+        "type": "keyword"
+      },
+      "regionId": {
+        "type": "keyword"
+      },
+      "regionTitle": {
+        "type": "keyword"
+      },
+      "departmentId": {
+        "type": "keyword"
+      },
+      "departmentTitle": {
+        "type": "keyword"
+      },
+      "kuspNumber": {
+        "properties": {
+          "number": {
+            "type": "text",
+            "analyzer": "index_ngram",
+            "search_analyzer": "search_ngram",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            }
+          },
+          "uniqId": {
+            "type": "keyword"
+          },
+          "idVersion": {
+            "type": "keyword"
+          },
+          "statusTitle": {
+            "type": "keyword"
+          },
+          "errorText": {
+            "type": "keyword"
+          }
+        }
+      },
+      "fileLink": {
+        "type": "keyword"
+      },
+      "signer": {
+        "properties": {
+          "divisionTitle": {
+            "type": "keyword"
+          },
+          "role": {
+            "type": "keyword"
+          },
+          "fullName": {
+            "type": "text",
+            "analyzer": "index_ngram",
+            "search_analyzer": "search_ngram",
+            "fields": {
+              "keyword": {
+                "type": "keyword"
+              }
+            }
+          },
+          "position": {
+            "type": "keyword"
+          },
+          "certificate": {
+            "type": "keyword"
+          },
+          "signDate": {
+            "type": "date"
+          }
+        }
+      }
+    }
+  }
+}

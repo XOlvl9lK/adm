@@ -1,0 +1,62 @@
+[
+  {
+    "userLogin": "Mcgowan",
+    "eventDate": "2022-06-22T08:48:26.613+03:00",
+    "url": "/addition",
+    "browserVersion": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+    "ipAddress": "177.154.72.233",
+    "resultTitle": "Успешно",
+    "queryParam": "?bedroom=animal",
+    "divisionTitle": "Подразделение 1",
+    "departmentTitle": "Ведомство 1",
+    "regionTitle": "Регион 1"
+  },
+  {
+    "userLogin": "Gail",
+    "eventDate": "2022-06-22T08:48:26.613-02:00",
+    "url": "/angle/apparatus.php",
+    "browserVersion": "Safari/537.36",
+    "ipAddress": "159.49.21.125",
+    "resultTitle": "Ошибка",
+    "queryParam": "?actor=basketball&acoustics=afterthought",
+    "divisionTitle": "Подразделение 1",
+    "departmentTitle": "Ведомство 1",
+    "regionTitle": "Регион 1"
+  },
+  {
+    "userLogin": "Sims",
+    "eventDate": "2022-06-22T08:48:26.613+05:00",
+    "url": "/advice/attack",
+    "browserVersion": "Yowser/2.5",
+    "ipAddress": "21.97.255.217",
+    "resultTitle": "Ошибка",
+    "queryParam": "?books=bath",
+    "divisionTitle": "Подразделение 1",
+    "departmentTitle": "Ведомство 1",
+    "regionTitle": "Регион 1"
+  },
+  {
+    "userLogin": "Richards",
+    "eventDate": "2022-06-22T08:48:26.613+01:00",
+    "url": "/blade.php",
+    "browserVersion": "Chrome/100.0.4896.160 YaBrowser/22.5.3.684",
+    "ipAddress": "121.52.208.92",
+    "resultTitle": "Успешно",
+    "queryParam": "?bells=branch",
+    "divisionTitle": "Подразделение 2",
+    "departmentTitle": "Ведомство 2",
+    "regionTitle": "Регион 2"
+  },
+  {
+    "userLogin": "Rhoda",
+    "eventDate": "2022-06-22T08:48:26.613-03:00",
+    "url": "/back",
+    "browserVersion": "AppleWebKit/537.36 (KHTML, like Gecko)",
+    "ipAddress": "149.238.31.222",
+    "resultTitle": "Успешно",
+    "queryParam": "?art=bit&afterthought=aftermath",
+    "divisionTitle": "Подразделение 3",
+    "departmentTitle": "Ведомство 3",
+    "regionTitle": "Регион 3"
+  }
+]

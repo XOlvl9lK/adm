@@ -1,0 +1,12 @@
+node_modules
+.git
+.idea
+.env.dev
+.env.prod
+README.md
+.gitlab-ci.yml
+.gitlab-ci/
+deploy.yml
+werf.yaml
+.gitignore
+.helm

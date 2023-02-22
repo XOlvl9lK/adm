@@ -1,0 +1,51 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: administration-backend
+  labels:
+    app: administration-backend
+  namespace: integration
+  annotations:
+    pod-reloader.deckhouse.io/auto: "true"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: administration-backend
+  template:
+    metadata:
+      labels:
+        app: administration-backend
+    spec:
+      containers:
+        - name: administration-backend
+          image: {{ pluck "administration-backend" .Values.werf.image | first }}
+          imagePullPolicy: Always
+          #imagePullPolicy: Never
+          #imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: env-administration-backend
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always
+
+      imagePullSecrets:
+        - name: regcred
+
+---
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: integration
+  name: administration-backend
+spec:
+  ports:
+    - targetPort: 3000
+      port: 80
+      protocol: TCP
+      name: http
+  selector:
+    app: administration-backend
+
