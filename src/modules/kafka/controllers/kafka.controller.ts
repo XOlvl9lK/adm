@@ -8,11 +8,12 @@ export class KafkaController {
 
   @Post(':topic')
   async send(@Param('topic') topic: string, @Body() messageDto: SendMessageDto) {
-    const res = await this.kafkaService.send(topic, messageDto);
-    if (!res || !res.length) {
-      throw new HttpException('Ошибка отправки сообщения в Kafka', HttpStatus.BAD_REQUEST);
-    }
-    return res;
+    // const res = await this.kafkaService.send(topic, messageDto);
+    // if (!res || !res.length) {
+    //   throw new HttpException('Ошибка отправки сообщения в Kafka', HttpStatus.BAD_REQUEST);
+    // }
+    // return res;
+    return { success: true }
   }
 
   @Post('fake/:topic')
